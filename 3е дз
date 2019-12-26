@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+int main(void)
+{
+    setlocale(LC_ALL,"Russian");
+
+    int a,N,n;
+
+    printf("Ââåäèòå ÷èñëî âåðøèí ãðàôà: ");
+    scanf("%d",&n);
+    printf("Ââåäèòå ÷èñëî ð¸áåð ãðàôà: ");
+    scanf("%d",&N);
+    a = 0.5*(n-1)*(n-2);
+    if (N>a) {
+        printf ("Ãðàô ìîæíî ïîñòðîèòü");
+    }
+    if (N<=a) {
+        printf ("Ãðàô íåëüçÿ ïîñòðîèòü");
+    }
+    return 0;
+}
