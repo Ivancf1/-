@@ -1,0 +1,68 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int main() {
+    int n, t, s, k;
+    
+    printf("Vvedite kol-vo vershin grafa: ");
+    scanf("%d", &n);
+    
+    int **a = (int**)malloc(n*sizeof(int*));
+    for (int i = 0; i < n; i++)
+        a[i] = (int*)malloc(n*sizeof(int));
+
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            a[i][j] = 0;
+    
+    int cmd = -1, v1, v2;
+    printf("Vvedite comandu.\n    1 - dobavit rebro mezdu dvuma vershinami\n    0. Zakonchit vvod\nVNIMANIE diapazon vershin: %d - %d\n", 0, n-1);
+    while(cmd != 0) {
+        scanf("%d", &cmd);
+        if (cmd == 1) {
+            printf("Rebro mezdu versinami: ");
+            scanf("%d", &v1);
+            scanf("%d", &v2);
+            if (v1 < n && v1 >=0 && v2 < n && v2 >=0) {
+                a[v1][v2]++;
+                a[v2][v1]++;
+            }
+        }
+    }
+
+    printf("Matritsa vigladit tak:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%d ", a[i][j]);
+        }
+        printf("\n");
+    }
+    printf("Kratnie rebra:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = i; j < n; j++) {
+            if (a[i][j] > 1) printf("    %d - %d, kratnost: %d\n", i, j, a[i][j]);
+        }
+    }
+    
+    //system("pause");
+    
+    //VISUAL. IT MAY BE DELETED AT ALL
+    /*
+    FILE* f = fopen("graph.txt", "w");
+	fprintf(f, "graph {\n    {1");
+	for (int i = 1; i < n; i++) fprintf(f, ", %d", i+1);
+	fprintf(f, "}\n");
+	for (int i = 0; i < n; i++) {
+        for (int j = i+1; j < n; j++) {
+            if (a[i][j] == 1) fprintf(f, "    %d -- %d;\n", i+1, j+1);
+        }
+    }
+	fprintf(f, "}");
+	fclose(f);
+	system("dot -Tpng graph.txt -o graph.png");
+	system("graph.png");
+	system("pause");
+	*/
+    //END OF VISUAL
+    return 0;
+}
